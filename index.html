@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASCIIFY — turn photos into character art</title>
+<meta name="description" content="Drop a photo, get it back as ASCII art. Runs entirely in your browser.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">ASCII<span class="brand-accent">FY</span></span>
+  </div>
+  <p class="tagline">every pixel, one character at a time</p>
+</header>
+
+<main>
+  <section id="stage" class="stage" tabindex="0" aria-label="Drop an image here to convert it">
+    <div id="dropHint" class="drop-hint">
+      <div class="drop-glyphs" aria-hidden="true">
+        <span>@</span><span>%</span><span>#</span><span>*</span><span>+</span><span>=</span><span>-</span><span>:</span><span>.</span>
+      </div>
+      <p class="drop-title">Drop a photo here</p>
+      <p class="drop-sub">or click to browse — nothing leaves your browser</p>
+    </div>
+    <canvas id="output" class="output-canvas" aria-hidden="true"></canvas>
+    <input type="file" id="fileInput" accept="image/*" hidden>
+  </section>
+
+  <p id="statusLine" class="status-line" role="status" aria-live="polite"></p>
+
+  <section class="controls" id="controls" hidden>
+    <div class="control">
+      <label for="widthRange">density <span id="widthVal">120</span></label>
+      <input type="range" id="widthRange" min="40" max="220" value="120" step="2">
+    </div>
+
+    <div class="control">
+      <label for="charsetSelect">character set</label>
+      <select id="charsetSelect">
+        <option value="classic" selected>classic — " .:-=+*#%@"</option>
+        <option value="dense">dense — fine gradient</option>
+        <option value="blocks">blocks — █▓▒░</option>
+      </select>
+    </div>
+
+    <div class="control control-toggle">
+      <label for="colorToggle">true color</label>
+      <input type="checkbox" id="colorToggle" checked>
+    </div>
+
+    <div class="control-actions">
+      <button id="downloadPng" class="btn btn-primary" type="button">Download PNG</button>
+      <button id="downloadTxt" class="btn" type="button">Download TXT</button>
+      <button id="resetBtn" class="btn btn-ghost" type="button">Start over</button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <p>Images are resized to a character grid, mapped by brightness, and drawn back out as text — no upload, no server, no tracking.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
